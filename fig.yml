@@ -1,0 +1,18 @@
+bloggity:
+  build: bloggity
+  volumes:
+    - bloggity:/usr/src/app
+  ports:
+    - 5100:5000
+  environment:
+    BLOGGITY_ENV:
+  command: sh run.sh
+
+nginx:
+  build: nginx
+  ports:
+    - "80:80"
+    - "443:443"
+  links:
+    - bloggity:bloggity
+  dns: 127.0.0.1
